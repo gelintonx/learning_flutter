@@ -1,5 +1,5 @@
 # Food App
 
 
-Project to improve my flutter skilss 
+Project to improve my flutter skils
 
