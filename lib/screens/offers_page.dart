@@ -15,10 +15,7 @@ class _OffersPageState extends State<OffersPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(padding: EdgeInsets.only(bottom: 150)),
-          NavigationWidget(
-            food: false,
-            offers: true,
-          ),
+          NavigationWidget(),
           OffersCard(
             discountName: "Hot Dogs",
             discount: 7,

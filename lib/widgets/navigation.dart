@@ -1,38 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/providers/NavigationBloc.dart';
+import 'package:provider/provider.dart';
 
-class NavigationWidget extends StatefulWidget {
-  bool food;
-  bool offers;
-
-  NavigationWidget({@required this.food, this.offers});
-
-  @override
-  _NavigationWidgetState createState() => _NavigationWidgetState();
-}
-
-class _NavigationWidgetState extends State<NavigationWidget> {
-  void _handleNavigation(route) {
-    Navigator.pushNamed(context, route);
-  }
-
+class NavigationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final navigationProvider = Provider.of<NavigationBloc>(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         GestureDetector(
           onTap: () {
-            setState(() {
-              widget.food = true;
-              widget.offers = false;
-              _handleNavigation('/');
-            });
+            if (navigationProvider.isFood == true) {
+              navigationProvider.setCurrentIndex(0);
+              navigationProvider.isOffer = true;
+              Navigator.pushNamed(context, '/');
+            } else {
+              navigationProvider.setCurrentIndex(0);
+              Navigator.pushNamed(context, '/');
+            }
           },
           child: Container(
             decoration: BoxDecoration(
                 border: Border(
                     bottom: BorderSide(
-              color: widget.food ? Colors.deepPurple[200] : Colors.transparent,
+              color: navigationProvider.currentIndex == 0
+                  ? Colors.deepPurple[200]
+                  : Colors.transparent,
               width: 3,
             ))),
             child: Text(
@@ -43,18 +37,23 @@ class _NavigationWidgetState extends State<NavigationWidget> {
         ),
         GestureDetector(
           onTap: () {
-            setState(() {
-              widget.offers = true;
-              widget.food = false;
-              _handleNavigation('/offers');
-            });
+            if (navigationProvider.isOffer) {
+              //navigationProvider.setCurrentIndex(0);
+              navigationProvider.isOffer = false;
+              Navigator.pushNamed(context, '/offers');
+            } else {
+              navigationProvider.isFood = false;
+              navigationProvider.setCurrentIndex(1);
+              Navigator.pushNamed(context, '/offers');
+            }
           },
           child: Container(
             decoration: BoxDecoration(
                 border: Border(
                     bottom: BorderSide(
-              color:
-                  widget.offers ? Colors.deepPurple[200] : Colors.transparent,
+              color: navigationProvider.currentIndex == 1
+                  ? Colors.deepPurple[200]
+                  : Colors.transparent,
               width: 3,
             ))),
             child: Text(

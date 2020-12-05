@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(padding: EdgeInsets.only(bottom: 150)),
-            NavigationWidget(food: true, offers: false),
+            NavigationWidget(),
             Container(
                 padding: EdgeInsets.only(top: 30),
                 width: 300,
